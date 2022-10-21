@@ -17,6 +17,8 @@ export class ListViewComponent implements OnInit {
   selectedView: string = '';
   tempList: list[] = [];
   fromList: string[] = [];
+  parentCheckBox: boolean = false;
+  childCheckBox: boolean[] = [false];
   paginationObj = new pagination();
   constructor(public commonService: CommonService, private router: Router) {}
 
@@ -25,6 +27,10 @@ export class ListViewComponent implements OnInit {
     this.paginationObj.totalPages = Math.ceil(
       this.list.length / this.paginationObj.pageSize
     );
+    this.list.forEach((item) => {
+      item.isChecked = false;
+    });
+    console.log(this.list);
     this.status = this.list.map((item) => item.status);
     this.status = [...new Set(this.status)];
     this.selectedView = this.router.url.split('/')[1];
@@ -32,6 +38,26 @@ export class ListViewComponent implements OnInit {
     this.fromList = [...new Set(this.list.map((item) => item.from))];
   }
 
+  onParentChange() {
+    if (this.parentCheckBox) {
+      this.list.forEach((item) => {
+        item.isChecked = true;
+      });
+    } else {
+      this.list.forEach((item) => {
+        item.isChecked = false;
+      });
+    }
+  }
+
+  onChildChange() {
+    const allChecked = this.list.filter((item) => item.isChecked);
+    if (allChecked.length === this.list.length) {
+      this.parentCheckBox = true;
+    } else {
+      this.parentCheckBox = false;
+    }
+  }
   filterKey(event: string) {
     this.searchFilter = event;
   }

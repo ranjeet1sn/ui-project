@@ -10,7 +10,9 @@
   <table class="table table-hover">
     <thead>
       <tr>
-        <th scope="col"><mat-checkbox></mat-checkbox></th>
+        <th scope="col">
+          <mat-checkbox [(ngModel)]="parentCheckBox" (change)="onParentChange()"></mat-checkbox>
+        </th>
         <th scope="col">Task</th>
         <th scope="col">Status</th>
         <th scope="col">From</th>
@@ -32,7 +34,7 @@
         "
       >
         <tr>
-          <td scope="col"><mat-checkbox></mat-checkbox></td>
+          <td scope="col"><mat-checkbox (change)="onChildChange()" [(ngModel)]="item.isChecked"></mat-checkbox></td>
           <td>{{ item.title }}</td>
           <td>
             <div class="not-completed" *ngIf="item.status === 'Uncomplete'">

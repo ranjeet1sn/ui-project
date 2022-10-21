@@ -12,6 +12,7 @@ export interface list {
   lat: number;
   lng: number;
   draggable: boolean;
+  isChecked?: boolean;
 }
 @Component({
   selector: 'app-map-view',
@@ -30,13 +31,13 @@ export class MapViewComponent implements OnInit {
   lat: number = 23.0225;
   lng: number = 72.5714;
   fromList: string[] = [];
-  icon={
+  icon = {
     url: '../../../assets/Group 142.png',
     scaledSize: {
       width: 45,
-      height: 45
-    }
-  }
+      height: 45,
+    },
+  };
   constructor(public commonService: CommonService, private router: Router) {}
 
   ngOnInit() {
