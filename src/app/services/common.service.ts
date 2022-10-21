@@ -19,7 +19,7 @@ export class CommonService {
       date: new Date(),
     },
     {
-      title: 'Work Flow:Require Location',
+      title: 'Test Location',
       status: 'Low Risk',
       from: 'testuser@gmail.com',
       to: 'denisgordiyenya@gmail.com',

@@ -28,7 +28,7 @@ import { FilterPipe } from './pipes/filter.pipe';
     BrowserAnimationsModule,
     SharedModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBPQlAlgPgEsYbjYCf8GdVm8xTpYr0fnEY',
+      apiKey: 'AIzaSyDsFurg-VtJDRaPIrKaKsj0LPtS4dsuwKo',
     }),
   ],
   providers: [],

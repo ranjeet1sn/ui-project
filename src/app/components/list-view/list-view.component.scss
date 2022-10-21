@@ -95,8 +95,12 @@ table {
 .info {
   margin: 15px 0px 0px 45px;
 }
-h1{
+h1 {
   margin: 15px 0px 0px 45px;
   font-weight: 500;
   font-size: 32px;
+}
+.noData {
+  display: flex;
+  justify-content: center;
 }

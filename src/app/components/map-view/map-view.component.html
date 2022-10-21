@@ -8,37 +8,40 @@
 <h1>Submissions</h1>
 <div class="section">
   <div class="left">
-    <div class="cards" *ngFor="let item of list | filter: searchFilter">
-      <div class="cards-header">
-        <h2>{{ item.title }}</h2>
-        <div class="not-completed" *ngIf="item.status === 'Uncomplete'">
-          <div class="circle"></div>
-          <span>{{ item.status }} </span>
+    <ng-container *ngIf="list | filter: searchFilter as result">
+      <div class="cards" *ngFor="let item of result">
+        <div class="cards-header">
+          <h2>{{ item.title }}</h2>
+          <div class="not-completed" *ngIf="item.status === 'Uncomplete'">
+            <div class="circle"></div>
+            <span>{{ item.status }} </span>
+          </div>
+          <div class="low-risk" *ngIf="item.status === 'Low Risk'">
+            <div class="circle"></div>
+            <span>{{ item.status }} </span>
+          </div>
+          <div class="needs-review" *ngIf="item.status === 'Need Review'">
+            <div class="circle"></div>
+            <span>{{ item.status }} </span>
+          </div>
         </div>
-        <div class="low-risk" *ngIf="item.status === 'Low Risk'">
-          <div class="circle"></div>
-          <span>{{ item.status }} </span>
+        <div>
+          <span class="from">From : </span>
+          <span>{{ item.from }}</span>
         </div>
-        <div class="needs-review" *ngIf="item.status === 'Need Review'">
-          <div class="circle"></div>
-          <span>{{ item.status }} </span>
+        <div class="mt-5">
+          <span class="from">To : </span>
+          <span>{{ item.to }}</span>
+        </div>
+        <div class="mt-5">
+          <span class="from">Due Date : </span>
+          <span style="color: #ff3d00">{{
+            commonService.getDate(item.date)
+          }}</span>
         </div>
       </div>
-      <div>
-        <span class="from">From : </span>
-        <span>{{ item.from }}</span>
-      </div>
-      <div class="mt-5">
-        <span class="from">To : </span>
-        <span>{{ item.to }}</span>
-      </div>
-      <div class="mt-5">
-        <span class="from">Due Date : </span>
-        <span style="color: #ff3d00">{{
-          commonService.getDate(item.date)
-        }}</span>
-      </div>
-    </div>
+      <div class="noData" *ngIf="result.length === 0">No Records Found</div>
+    </ng-container>
   </div>
   <div class="right">
     <agm-map

@@ -11,6 +11,7 @@
   <mat-form-field appearance="outline" class="left-margin">
     <mat-label>Select From</mat-label>
     <mat-select (selectionChange)="onfilterList($event, 'from')">
+      <mat-option value="">All</mat-option>
       <mat-option *ngFor="let key of fromList" [value]="key">
         {{ key }}
       </mat-option>
@@ -19,9 +20,9 @@
   <mat-form-field appearance="outline" class="left-margin">
     <mat-label>Select Status</mat-label>
     <mat-select
-      [(ngModel)]="selectedStatus"
       (selectionChange)="onfilterList($event, 'status')"
     >
+      <mat-option value="">All</mat-option>
       <mat-option [value]="key" *ngFor="let key of status">
         {{ key }}
       </mat-option>

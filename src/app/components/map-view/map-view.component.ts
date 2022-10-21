@@ -49,9 +49,13 @@ export class MapViewComponent implements OnInit {
   filterList(event: { key: string; value: string }) {
     this.list = this.tempList;
     if (event.key !== 'date') {
-      this.list = this.list.filter(
-        (item: any) => item[event.key] === event.value
-      );
+      if (event.value !== '') {
+        this.list = this.list.filter(
+          (item: any) => item[event.key] === event.value
+        );
+      } else {
+        this.list = this.tempList;
+      }
     } else {
       this.list = this.list.filter(
         (item) =>

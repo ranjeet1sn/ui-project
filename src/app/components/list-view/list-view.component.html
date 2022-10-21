@@ -18,41 +18,46 @@
         <th scope="col">Due Date</th>
       </tr>
     </thead>
-    <tbody
-      *ngFor="
-        let item of list
-          | slice
-            : paginationObj.currentPage * paginationObj.pageSize -
-                paginationObj.pageSize
-            : paginationObj.currentPage * paginationObj.pageSize
-          | filter: searchFilter;
-        let i = index
-      "
-    >
-      <tr>
-        <td>{{ item.title }}</td>
-        <td>
-          <div class="not-completed" *ngIf="item.status === 'Uncomplete'">
-            <div class="circle"></div>
-            <span>{{ item.status }} </span>
-          </div>
-          <div class="low-risk" *ngIf="item.status === 'Low Risk'">
-            <div class="circle"></div>
-            <span>{{ item.status }} </span>
-          </div>
-          <div class="needs-review" *ngIf="item.status === 'Need Review'">
-            <div class="circle"></div>
-            <span>{{ item.status }} </span>
-          </div>
-        </td>
-        <td>{{ item.from }}</td>
-        <td>{{ item.to }}</td>
-        <td>{{ item.address }}</td>
-        <td [ngClass]="{ highlight: i % 2 !== 0 }">
-          {{ commonService.getDate(item.date) }}
-        </td>
-      </tr>
-    </tbody>
+    <ng-container *ngIf="list | filter: searchFilter as result">
+      <tbody
+        *ngFor="
+          let item of result
+            | slice
+              : paginationObj.currentPage * paginationObj.pageSize -
+                  paginationObj.pageSize
+              : paginationObj.currentPage * paginationObj.pageSize
+            | filter: searchFilter;
+          let i = index
+        "
+      >
+        <tr>
+          <td>{{ item.title }}</td>
+          <td>
+            <div class="not-completed" *ngIf="item.status === 'Uncomplete'">
+              <div class="circle"></div>
+              <span>{{ item.status }} </span>
+            </div>
+            <div class="low-risk" *ngIf="item.status === 'Low Risk'">
+              <div class="circle"></div>
+              <span>{{ item.status }} </span>
+            </div>
+            <div class="needs-review" *ngIf="item.status === 'Need Review'">
+              <div class="circle"></div>
+              <span>{{ item.status }} </span>
+            </div>
+          </td>
+          <td>{{ item.from }}</td>
+          <td>{{ item.to }}</td>
+          <td>{{ item.address }}</td>
+          <td [ngClass]="{ highlight: i % 2 !== 0 }">
+            {{ commonService.getDate(item.date) }}
+          </td>
+        </tr>
+      </tbody>
+      <div class="noData" *ngIf="result.length === 0">
+        <p>No Records Found</p>
+      </div>
+    </ng-container>
   </table>
   <div class="info">
     {{
@@ -60,7 +65,8 @@
         paginationObj.pageSize +
         1
     }}
-    - {{ paginationObj.currentPage * paginationObj.pageSize }} of {{list.length}} submissions
+    - {{ paginationObj.currentPage * paginationObj.pageSize }} of
+    {{ list.length }} submissions
   </div>
   <div class="pagination">
     <a

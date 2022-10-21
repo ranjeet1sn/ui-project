@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'filter',
 })
 export class FilterPipe implements PipeTransform {
-  transform(value: any, args: string): any {
+  transform(value: any[], args: string): any {
     if (!args) return value;
     if (
       value.some(
@@ -33,6 +33,10 @@ export class FilterPipe implements PipeTransform {
       return value.filter(
         (item: any) =>
           item.address.toLowerCase().indexOf(args.toLowerCase()) > -1
+      );
+    } else {
+      return value.filter(
+        (item: any) => item.title.toLowerCase().indexOf(args.toLowerCase()) > -1
       );
     }
   }
