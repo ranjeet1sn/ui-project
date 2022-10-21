@@ -1,0 +1,42 @@
+.common-margin {
+  margin: 15px 0px 0px 45px;
+}
+
+.filters {
+  display: flex;
+}
+.left-margin {
+  margin-left: 80px;
+}
+mat-button-toggle-group {
+  height: 50px;
+  position: relative;
+  top: 5px;
+  border: 1px solid #b8b9bc !important;
+}
+::ng-deep .mat-button-toggle-checked {
+  background-color: #2188d9 !important;
+  color: #fff !important;
+}
+.export {
+  display: flex;
+  align-items: center;
+  position: relative;
+  bottom: 10px;
+  left: 10px;
+  a {
+    color: #2188d9;
+    cursor: pointer;
+    &:hover{
+      border-bottom: 1px solid #2188d9;
+    }
+  }
+  mat-icon {
+    color: #2188d9;
+    margin-right: 5px;
+  }
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  border: 1px solid #b8b9bc !important;
+}

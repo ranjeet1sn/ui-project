@@ -1,0 +1,48 @@
+<div class="filters common-margin">
+  <mat-form-field appearance="outline" style="width: 18%">
+    <input
+      matInput
+      placeholder="Search"
+      [(ngModel)]="searchFilter"
+      (keyup)="onSearch()"
+    />
+    <mat-icon matPrefix>search</mat-icon>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="left-margin">
+    <mat-label>Select From</mat-label>
+    <mat-select (selectionChange)="onfilterList($event, 'from')">
+      <mat-option *ngFor="let key of fromList" [value]="key">
+        {{ key }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="left-margin">
+    <mat-label>Select Status</mat-label>
+    <mat-select
+      [(ngModel)]="selectedStatus"
+      (selectionChange)="onfilterList($event, 'status')"
+    >
+      <mat-option [value]="key" *ngFor="let key of status">
+        {{ key }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="left-margin">
+    <input
+      matInput
+      (dateChange)="onfilterList($event, 'date')"
+      [matDatepicker]="picker"
+      [(ngModel)]="selectedDate"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-button-toggle-group class="left-margin" [(ngModel)]="selectedView">
+    <mat-button-toggle value="map" routerLink="/map">Map</mat-button-toggle>
+    <mat-button-toggle value="list" routerLink="/list">List</mat-button-toggle>
+  </mat-button-toggle-group>
+  <div class="export">
+    <mat-icon>note_add</mat-icon>
+    <a (click)="exportData()">Export</a>
+  </div>
+</div>

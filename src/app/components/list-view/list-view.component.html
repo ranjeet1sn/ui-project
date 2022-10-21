@@ -1,0 +1,97 @@
+<app-filter
+  (filterKey)="filterKey($event)"
+  [status]="status"
+  [fromList]="fromList"
+  [selectedView]="selectedView"
+  (filterList)="filterList($event)"
+></app-filter>
+<h1>Submissions</h1>
+<div class="table">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Task</th>
+        <th scope="col">Status</th>
+        <th scope="col">From</th>
+        <th scope="col">To</th>
+        <th scope="col">Customer Address</th>
+        <th scope="col">Due Date</th>
+      </tr>
+    </thead>
+    <tbody
+      *ngFor="
+        let item of list
+          | slice
+            : paginationObj.currentPage * paginationObj.pageSize -
+                paginationObj.pageSize
+            : paginationObj.currentPage * paginationObj.pageSize
+          | filter: searchFilter;
+        let i = index
+      "
+    >
+      <tr>
+        <td>{{ item.title }}</td>
+        <td>
+          <div class="not-completed" *ngIf="item.status === 'Uncomplete'">
+            <div class="circle"></div>
+            <span>{{ item.status }} </span>
+          </div>
+          <div class="low-risk" *ngIf="item.status === 'Low Risk'">
+            <div class="circle"></div>
+            <span>{{ item.status }} </span>
+          </div>
+          <div class="needs-review" *ngIf="item.status === 'Need Review'">
+            <div class="circle"></div>
+            <span>{{ item.status }} </span>
+          </div>
+        </td>
+        <td>{{ item.from }}</td>
+        <td>{{ item.to }}</td>
+        <td>{{ item.address }}</td>
+        <td [ngClass]="{ highlight: i % 2 !== 0 }">
+          {{ commonService.getDate(item.date) }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="info">
+    {{
+      paginationObj.currentPage * paginationObj.pageSize -
+        paginationObj.pageSize +
+        1
+    }}
+    - {{ paginationObj.currentPage * paginationObj.pageSize }} of {{list.length}} submissions
+  </div>
+  <div class="pagination">
+    <a
+      [ngClass]="{ disable: paginationObj.currentPage === 1 }"
+      (click)="paginationObj.currentPage = paginationObj.currentPage - 1"
+    >
+      &laquo;
+    </a>
+    <a
+      *ngFor="
+        let item of [].constructor(paginationObj.totalPages);
+        let i = index
+      "
+      [ngClass]="{
+        disable:
+          paginationObj.currentPage === i &&
+          paginationObj.currentPage >= list.length / paginationObj.pageSize,
+        active: paginationObj.currentPage === i + 1
+      }"
+      (click)="paginationObj.currentPage = i + 1"
+    >
+      {{ i + 1 }}
+    </a>
+    <a
+      [ngClass]="{
+        disable:
+          paginationObj.currentPage >= list.length / paginationObj.pageSize
+      }"
+      (click)="paginationObj.currentPage = paginationObj.currentPage + 1"
+    >
+      &raquo;
+    </a>
+  </div>
+</div>

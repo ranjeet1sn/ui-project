@@ -1,0 +1,68 @@
+<app-filter
+  (filterKey)="filterKey($event)"
+  [status]="status"
+  [fromList]="fromList"
+  [selectedView]="selectedView"
+  (filterList)="filterList($event)"
+></app-filter>
+<h1>Submissions</h1>
+<div class="section">
+  <div class="left">
+    <div class="cards" *ngFor="let item of list | filter: searchFilter">
+      <div class="cards-header">
+        <h2>{{ item.title }}</h2>
+        <div class="not-completed" *ngIf="item.status === 'Uncomplete'">
+          <div class="circle"></div>
+          <span>{{ item.status }} </span>
+        </div>
+        <div class="low-risk" *ngIf="item.status === 'Low Risk'">
+          <div class="circle"></div>
+          <span>{{ item.status }} </span>
+        </div>
+        <div class="needs-review" *ngIf="item.status === 'Need Review'">
+          <div class="circle"></div>
+          <span>{{ item.status }} </span>
+        </div>
+      </div>
+      <div>
+        <span class="from">From : </span>
+        <span>{{ item.from }}</span>
+      </div>
+      <div class="mt-5">
+        <span class="from">To : </span>
+        <span>{{ item.to }}</span>
+      </div>
+      <div class="mt-5">
+        <span class="from">Due Date : </span>
+        <span style="color: #ff3d00">{{
+          commonService.getDate(item.date)
+        }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="right">
+    <agm-map
+      [latitude]="lat"
+      [longitude]="lng"
+      [zoom]="zoom"
+      [disableDefaultUI]="false"
+    >
+      <agm-marker
+        *ngFor="let m of list; let i = index"
+        (dragEnd)="clickedMarker($event)"
+        [latitude]="m.lat"
+        [longitude]="m.lng"
+        [label]="m.address"
+        [markerDraggable]="m.draggable"
+      >
+        <agm-info-window>
+          <strong>Label: {{ m.address }}</strong
+          ><br />
+          <strong>Latitude: {{ m.lat }}</strong
+          ><br />
+          <strong>Longitude: {{ m.lng }}</strong>
+        </agm-info-window>
+      </agm-marker>
+    </agm-map>
+  </div>
+</div>

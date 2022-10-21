@@ -3,16 +3,35 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  FilterComponent,
+  HeaderComponent,
+  MapViewComponent,
+  ListViewComponent,
+} from './components';
+import { AgmCoreModule } from '@agm/core';
+import { SharedModule } from './shared/shared.module';
+import { FilterPipe } from './pipes/filter.pipe';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FilterComponent,
+    MapViewComponent,
+    ListViewComponent,
+    HeaderComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    SharedModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBPQlAlgPgEsYbjYCf8GdVm8xTpYr0fnEY',
+    }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
