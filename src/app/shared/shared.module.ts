@@ -11,6 +11,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import {MatCheckboxModule} from '@angular/material/checkbox'
 @NgModule({
   declarations: [],
   imports: [
@@ -26,6 +27,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatNativeDateModule,
     FormsModule,
     MatButtonToggleModule,
+    MatCheckboxModule
   ],
   exports: [
     MatToolbarModule,
@@ -39,6 +41,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatNativeDateModule,
     FormsModule,
     MatButtonToggleModule,
+    MatCheckboxModule
   ],
 })
 export class SharedModule {}
