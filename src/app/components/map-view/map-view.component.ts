@@ -30,7 +30,13 @@ export class MapViewComponent implements OnInit {
   lat: number = 23.0225;
   lng: number = 72.5714;
   fromList: string[] = [];
-
+  icon={
+    url: '../../../assets/Group 142.png',
+    scaledSize: {
+      width: 45,
+      height: 45
+    }
+  }
   constructor(public commonService: CommonService, private router: Router) {}
 
   ngOnInit() {

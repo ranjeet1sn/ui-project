@@ -103,4 +103,10 @@ h1 {
 .noData {
   display: flex;
   justify-content: center;
+  width: 340%;
+  p{
+    font-weight: 500;
+    position: relative;
+    top: 5px;
+  }
 }

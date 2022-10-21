@@ -54,8 +54,8 @@
         *ngFor="let m of list; let i = index"
         (dragEnd)="clickedMarker($event)"
         [latitude]="m.lat"
+        [iconUrl]="$any(icon)"
         [longitude]="m.lng"
-        [label]="m.address"
         [markerDraggable]="m.draggable"
       >
         <agm-info-window>
